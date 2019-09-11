@@ -1,0 +1,16 @@
+---
+- name: Test playbook
+  hosts: all
+  become: false
+
+  tasks:
+  - name: Test redirects
+    uri:
+      url: "http://httpbin.org/status/307"
+      method: "POST"
+      body: test
+      follow_redirects: all
+    register: stuff
+
+  - debug:
+      msg: "{{stuff}}"
